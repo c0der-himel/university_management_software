@@ -14,4 +14,4 @@ async function dbConnector(): Promise<void> {
   }
 }
 
-dbConnector().then((r) => console.log(r));
+dbConnector().then((r: void) => console.log(r));
