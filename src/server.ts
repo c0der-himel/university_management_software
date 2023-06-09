@@ -1,17 +1,18 @@
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config/index';
+import logger from './share/logger';
 
 async function dbConnector(): Promise<void> {
   try {
     await mongoose.connect(config.db_url as string);
-    console.log('🍀 DB is connected successfully');
+    logger.info('🍀 DB is connected successfully');
     app.listen(config.port, (): void => {
-      console.log(`🚀 Server is listening on port ${config.port}`);
+      logger.info(`🚀 Server is listening on port ${config.port}`);
     });
   } catch (e) {
-    console.log('🛑 Failed to connect with DB');
+    logger.error('🛑 Failed to connect with DB', e);
   }
 }
 
-dbConnector().then((r: void) => console.log(r));
+dbConnector();
