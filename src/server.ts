@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config/index';
-import logger from './share/logger';
+import { errorLogger, logger } from './share/logger';
 
 async function dbConnector(): Promise<void> {
   try {
@@ -11,7 +11,7 @@ async function dbConnector(): Promise<void> {
       logger.info(`🚀 Server is listening on port ${config.port}`);
     });
   } catch (e) {
-    logger.error('🛑 Failed to connect with DB', e);
+    errorLogger.error('🛑 Failed to connect with DB', e);
   }
 }
 

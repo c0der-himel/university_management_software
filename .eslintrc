@@ -11,11 +11,11 @@
     "prettier"
   ],
   "rules": {
-    "no-console": "error",
+    "no-console": "warn",
     "no-undef": "error",
     "no-unused-expressions": "error",
     "no-unreachable": "error",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"]
   },
   "env": {
