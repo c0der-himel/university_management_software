@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import { UserRoutes } from './app/modules/user/user.route';
 
@@ -10,9 +10,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/users/', UserRoutes);
 
-app.get('/', async (req: Request, res: Response) => {
-  throw new Error('new error');
-});
+// app.get('/', async (req: Request, res: Response) => {
+//   throw new Error('new error');
+// });
 
 app.use(globalErrorHandler);
 
