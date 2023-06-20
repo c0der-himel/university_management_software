@@ -1,7 +1,9 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
 import config from '../../config';
 import ApiErrors from '../../errors/ApiErrors';
 import handleValidationError from '../../errors/handleValidationError';
+import handleZodErrors from '../../errors/handleZodErrors';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import { errorLogger } from '../../share/logger';
 
@@ -20,6 +22,11 @@ const globalErrorHandler: ErrorRequestHandler = (
 
   if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessages;
+  } else if (error instanceof ZodError) {
+    const simplifiedError = handleZodErrors(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
